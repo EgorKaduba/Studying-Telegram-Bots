@@ -18,19 +18,13 @@ async def bot_help(message: Message):
     await message.answer("Напиши мне что-нибудь и в ответ я пришлю тебе твоё сообщение")
 
 
-async def send_photo_echo(message: Message):
-    await message.reply_photo(message.photo[0].file_id)
-
-
+@dp.message()
 async def send_echo(message: Message):
-    await message.reply(message.text)
+    try:
+        await message.send_copy(chat_id=message.chat.id)
+    except TypeError:
+        await message.reply(text="Данный тип не поддерживается")
 
 
-# Другой метод регистрации хэндлеров (не нужно использовать декораторы)
-# dp.message.register(start, Command(commands='start'))
-# dp.message.register(bot_help, Command(commands='help'))
-# dp.message.register(send_echo)
-dp.message.register(send_photo_echo, F.photo)
-dp.message.register(send_echo)
 if __name__ == "__main__":
     dp.run_polling(bot)
