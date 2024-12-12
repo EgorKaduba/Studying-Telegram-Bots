@@ -23,8 +23,8 @@ async def send_echo(message: Message):
     await message.reply(message.text)
 
 # Другой метод регистрации хэндлеров (не нужно использовать декораторы)
-# dp.message.register(process_start_command, Command(commands='start'))
-# dp.message.register(process_help_command, Command(commands='help'))
+# dp.message.register(start, Command(commands='start'))
+# dp.message.register(bot_help, Command(commands='help'))
 # dp.message.register(send_echo)
 if __name__ == "__main__":
     dp.run_polling(bot)
